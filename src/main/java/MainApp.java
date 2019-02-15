@@ -62,7 +62,7 @@ public class MainApp {
         Actions builder = new Actions(driver);
         builder.moveToElement(indexPage.findElement().get(2)).build().perform();
 
-        indexPage.addButton();
+        indexPage.clickAddButton();
 
         wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
         assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
@@ -70,7 +70,7 @@ public class MainApp {
 
         builder.moveToElement(indexPage.findElement().get(3)).build().perform();
 
-        indexPage.addButton();
+        indexPage.clickAddButton();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("center_column")));
 
