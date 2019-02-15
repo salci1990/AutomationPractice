@@ -8,8 +8,6 @@ import java.text.DecimalFormat;
 
 public class ShoppingCart extends PageObject {
 
-    private static DecimalFormat df2 = new DecimalFormat("0.00");
-
     public ShoppingCart(WebDriver driver) {
         super(driver);
     }
