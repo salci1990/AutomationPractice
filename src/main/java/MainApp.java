@@ -18,7 +18,7 @@ public class MainApp {
     private SignInPage signInPage;
     private Header header;
     private IndexPage indexPage;
-    private LayerCard layerCard;
+    private LayerCart layerCart;
     private ShoppingCart shoppingCart;
 
     @BeforeClass
@@ -35,7 +35,7 @@ public class MainApp {
         indexPage = new IndexPage(driver);
         signInPage = new SignInPage(driver);
         header = new Header(driver);
-        layerCard = new LayerCard(driver);
+        layerCart = new LayerCart(driver);
         shoppingCart = new ShoppingCart(driver);
     }
 
@@ -59,32 +59,30 @@ public class MainApp {
         Actions builder = new Actions(driver);
         builder.moveToElement(indexPage.findElement().get(2)).build().perform();
 
-        indexPage.clickAddButton();
+        indexPage.addButton();
 
-        wait.until(ExpectedConditions.visibilityOf(layerCard.exitWindow()));
-        assertThat(layerCard.exitWindow().isDisplayed()).isTrue();
-        layerCard.exitWindowSuccess();
+        wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
+        assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
+        layerCart.closeLayerCart();
 
         builder.moveToElement(indexPage.findElement().get(3)).build().perform();
 
-        indexPage.clickAddButton();
+        indexPage.addButton();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOf(layerCard.exitWindow()));
-        assertThat(layerCard.exitWindow().isDisplayed()).isTrue();
-        layerCard.exitWindowSuccess();
+        wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
+        assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
+        layerCart.closeLayerCart();
 
         builder.moveToElement(header.shopingCard()).build().perform();
         wait.until(ExpectedConditions.visibilityOf(header.checkPriceCard()));
         assertThat(header.checkPriceCard().isDisplayed()).isTrue();
         header.openShoppingCard();
 
-        String total = String.format("%8.2f", shoppingCart.getTotalPrice());
-        String sum = String.format("%8.2f", shoppingCart.getFirstPrice() + shoppingCart.getSecondPrice() + shoppingCart.getShipping());
-        assertThat(sum).isEqualTo(total);
+        assertThat(shoppingCart.sum()).isEqualTo(shoppingCart.totalPrice());
     }
 
     @Test

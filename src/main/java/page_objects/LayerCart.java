@@ -17,7 +17,7 @@ public class LayerCart extends PageObject {
         return exitWindow;
     }
 
-    public void exitWindowSuccess() {
+    public void closeLayerCart() {
         exitWindow.click();
     }
 }

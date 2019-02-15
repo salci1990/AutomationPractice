@@ -25,7 +25,7 @@ public class IndexPage extends PageObject {
         return exitWindow;
     }
 
-    public void clickAddButton() {
+    public void addButton() {
         addButton.click();
     }
 
