@@ -19,7 +19,7 @@ public class MainApp {
     private Header header;
     private IndexPage indexPage;
     private LayerCard layerCard;
-    private ShoppingCard shoppingCard;
+    private ShoppingCart shoppingCart;
 
     @BeforeClass
     public void setUp() {
@@ -36,7 +36,7 @@ public class MainApp {
         signInPage = new SignInPage(driver);
         header = new Header(driver);
         layerCard = new LayerCard(driver);
-        shoppingCard = new ShoppingCard(driver);
+        shoppingCart = new ShoppingCart(driver);
     }
 
     @AfterClass
@@ -53,7 +53,7 @@ public class MainApp {
     }
 
     @Test
-    public void TotalPriceTest() {
+    public void totalPriceTest() {
         driver.get("http://automationpractice.com/index.php");
         driver.manage().window().maximize();
         Actions builder = new Actions(driver);
@@ -77,13 +77,13 @@ public class MainApp {
         assertThat(layerCard.exitWindow().isDisplayed()).isTrue();
         layerCard.exitWindowSuccess();
 
-        builder.moveToElement(header.moveToShopingCard()).build().perform();
+        builder.moveToElement(header.shopingCard()).build().perform();
         wait.until(ExpectedConditions.visibilityOf(header.checkPriceCard()));
         assertThat(header.checkPriceCard().isDisplayed()).isTrue();
         header.openShoppingCard();
 
-        String total = String.format("%8.2f", shoppingCard.getTotalPrice());
-        String sum = String.format("%8.2f", shoppingCard.getFirstPrice() + shoppingCard.getSecondPrice() + shoppingCard.getShipping());
+        String total = String.format("%8.2f", shoppingCart.getTotalPrice());
+        String sum = String.format("%8.2f", shoppingCart.getFirstPrice() + shoppingCart.getSecondPrice() + shoppingCart.getShipping());
         assertThat(sum).isEqualTo(total);
     }
 
