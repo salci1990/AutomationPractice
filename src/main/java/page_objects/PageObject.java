@@ -12,5 +12,3 @@ public class PageObject {
         PageFactory.initElements(driver, this);
     }
 }
-
-

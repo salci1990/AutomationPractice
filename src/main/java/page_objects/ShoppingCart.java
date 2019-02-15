@@ -6,11 +6,11 @@ import org.openqa.selenium.support.FindBy;
 
 import java.text.DecimalFormat;
 
-public class ShoppingCard extends PageObject {
+public class ShoppingCart extends PageObject {
 
     private static DecimalFormat df2 = new DecimalFormat("0.00");
 
-    public ShoppingCard(WebDriver driver) {
+    public ShoppingCart(WebDriver driver) {
         super(driver);
     }
 

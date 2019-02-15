@@ -14,7 +14,7 @@ public class Header extends PageObject {
     private WebElement loginLink;
 
     @FindBy(partialLinkText = "Cart")
-    private WebElement shoppingCard;
+    private WebElement shoppingCart;
 
     @FindBy(id = "button_order_cart")
     private WebElement pricesCard;
@@ -23,12 +23,12 @@ public class Header extends PageObject {
         loginLink.click();
     }
 
-    public WebElement moveToShopingCard() {
-        return shoppingCard;
+    public WebElement shopingCard() {
+        return shoppingCart;
     }
 
     public void openShoppingCard() {
-        shoppingCard.click();
+        shoppingCart.click();
     }
 
     public WebElement checkPriceCard() {
