@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LayerCard extends PageObject {
+public class LayerCart extends PageObject {
 
-    public LayerCard(WebDriver driver) {
+    public LayerCart(WebDriver driver) {
         super(driver);
     }
 
