@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +9,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import page_objects.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,11 +71,9 @@ public class MainApp {
         builder.moveToElement(indexPage.findElement().get(3)).build().perform();
 
         indexPage.addButton();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("center_column")));
+
         wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
         assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
         layerCart.closeLayerCart();
@@ -82,7 +83,7 @@ public class MainApp {
         assertThat(header.checkPriceCard().isDisplayed()).isTrue();
         header.openShoppingCard();
 
-        assertThat(shoppingCart.sum()).isEqualTo(shoppingCart.totalPrice());
+        assertThat(shoppingCart.sum()).isEqualTo(shoppingCart.getTotalPriceString());
     }
 
     @Test

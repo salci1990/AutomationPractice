@@ -26,23 +26,27 @@ public class ShoppingCart extends PageObject {
     @FindBy(id = "total_price_container")
     private WebElement totalPrice;
 
-    public String firstPrice() {
-        return String.format("%8.2f",Double.parseDouble(firstPrice.getText().substring(1)));
+    public Double firstPrice() {
+        return Double.parseDouble(firstPrice.getText().substring(1));
     }
 
-    public String secondPrice() {
-        return String.format("%8.2f",Double.parseDouble(secondPrice.getText().substring(1)));
+    public Double secondPrice() {
+        return Double.parseDouble(secondPrice.getText().substring(1));
     }
 
-    public String shipping() {
-        return String.format("%8.2f",Double.parseDouble(shipping.getText().substring(1)));
+    public Double shipping() {
+        return Double.parseDouble(shipping.getText().substring(1));
     }
 
-    public String totalPrice() {
-        return String.format("%8.2f", Double.parseDouble(totalPrice.getText().substring(1)));
+    public Double totalPrice() {
+        return Double.parseDouble(totalPrice.getText().substring(1));
+    }
+
+    public String getTotalPriceString() {
+        return String.format("%8.2f", totalPrice());
     }
 
     public String sum() {
-        return (firstPrice() + secondPrice() + shipping());
+        return String.format("%8.2f", (firstPrice() + secondPrice() + shipping()));
     }
 }
