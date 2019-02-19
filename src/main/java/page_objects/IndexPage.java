@@ -21,6 +21,9 @@ public class IndexPage extends PageObject {
     @FindBy(className = "product-container")
     private List<WebElement> listOfElements;
 
+    @FindBy(className = "sf-with-ul")
+    private WebElement womenPage;
+
     public WebElement exitWindowSuccess() {
         return exitWindow;
     }
@@ -35,5 +38,13 @@ public class IndexPage extends PageObject {
 
     public List<WebElement> findElement() {
         return listOfElements;
+    }
+
+    public WebElement moveToWomenPage() {
+        return womenPage;
+    }
+
+    public void clickToButton() {
+        womenPage.click();
     }
 }

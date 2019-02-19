@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class ShoppingCart extends PageObject {
 
@@ -23,6 +24,15 @@ public class ShoppingCart extends PageObject {
 
     @FindBy(id = "total_price_container")
     private WebElement totalPrice;
+
+    @FindBy(className = "cart_item")
+    private List<WebElement> sizeOfElements;
+
+    @FindBy(className = "cart_quantity_delete")
+    private WebElement deleteElement;
+
+    @FindBy(id = "product_2_7_0_0")
+    private WebElement isVisible;
 
     public Double firstPrice() {
         return Double.parseDouble(firstPrice.getText().substring(1));
@@ -46,5 +56,17 @@ public class ShoppingCart extends PageObject {
 
     public String sum() {
         return String.format("%8.2f", (firstPrice() + secondPrice() + shipping()));
+    }
+
+    public List<WebElement> getSizeOfElements() {
+        return sizeOfElements;
+    }
+
+    public WebElement deleteElement() {
+        return deleteElement;
+    }
+
+    public WebElement checkElement() {
+        return isVisible;
     }
 }
