@@ -62,4 +62,8 @@ public class ShoppingCart extends PageObject {
     public WebElement alert() {
         return alert;
     }
+
+    public Boolean isAlertDisplayed(){
+        return alert().isDisplayed();
+    }
 }

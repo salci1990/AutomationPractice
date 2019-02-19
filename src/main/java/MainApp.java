@@ -124,6 +124,6 @@ public class MainApp {
         builder.moveToElement(shoppingCart.deleteElement());
         shoppingCart.deleteElement().click();
 
-        assertThat(shoppingCart.alert());
+        assertThat(shoppingCart.isAlertDisplayed()).isTrue();
         }
 }
