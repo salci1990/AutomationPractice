@@ -28,7 +28,7 @@ public class MainApp {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 20);
 
         signInPage = new SignInPage(driver);
         header = new Header(driver);
@@ -53,7 +53,7 @@ public class MainApp {
         assertThat(signInPage.isAlertOn());
     }
 
-    @Test(priority = 1)
+    @Test
     public void totalPriceTest() {
         driver.get("http://automationpractice.com/index.php");
         driver.manage().window().maximize();
@@ -116,30 +116,14 @@ public class MainApp {
         assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
         layerCart.closeLayerCart();
 
-        builder.moveToElement(indexPage.findElement().get(1)).build().perform();
-
-        indexPage.clickAddButton();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("center_column")));
-
-        wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
-        assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
-        layerCart.closeLayerCart();
-
         builder.moveToElement(header.shopingCard()).build().perform();
         wait.until(ExpectedConditions.visibilityOf(header.checkPriceCard()));
         assertThat(header.checkPriceCard().isDisplayed()).isTrue();
         header.openShoppingCard();
 
-        wait.until(ExpectedConditions.visibilityOf(shoppingCart.checkElement()));
-
         builder.moveToElement(shoppingCart.deleteElement());
         shoppingCart.deleteElement().click();
 
-        assertThat(shoppingCart.checkElement().isDisplayed());
-        wait.until(ExpectedConditions.invisibilityOf(shoppingCart.checkElement()));
-
-        builder.moveToElement(shoppingCart.deleteElement());
-        shoppingCart.deleteElement().click();
-    }
+        assertThat(shoppingCart.getAlert());
+        }
 }

@@ -16,6 +16,9 @@ public class ShoppingCart extends PageObject {
     @FindBy(id = "product_price_3_13_0")
     private WebElement firstPrice;
 
+    @FindBy(className = "alert alert-warning")
+    private WebElement alert;
+
     @FindBy(id = "product_price_4_16_0")
     private WebElement secondPrice;
 
@@ -25,14 +28,8 @@ public class ShoppingCart extends PageObject {
     @FindBy(id = "total_price_container")
     private WebElement totalPrice;
 
-    @FindBy(className = "cart_item")
-    private List<WebElement> sizeOfElements;
-
     @FindBy(className = "cart_quantity_delete")
     private WebElement deleteElement;
-
-    @FindBy(id = "product_2_7_0_0")
-    private WebElement isVisible;
 
     public Double firstPrice() {
         return Double.parseDouble(firstPrice.getText().substring(1));
@@ -58,15 +55,11 @@ public class ShoppingCart extends PageObject {
         return String.format("%8.2f", (firstPrice() + secondPrice() + shipping()));
     }
 
-    public List<WebElement> getSizeOfElements() {
-        return sizeOfElements;
-    }
-
     public WebElement deleteElement() {
         return deleteElement;
     }
 
-    public WebElement checkElement() {
-        return isVisible;
+    public WebElement getAlert() {
+        return alert;
     }
 }
