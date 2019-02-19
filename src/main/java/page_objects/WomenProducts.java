@@ -22,7 +22,7 @@ public class WomenProducts extends PageObject {
         return headingCounter;
     }
 
-    public String getProductsNumber() {
+    public String productsNumber() {
         return productsNumber.getText();
     }
 

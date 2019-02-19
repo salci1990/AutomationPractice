@@ -40,11 +40,11 @@ public class IndexPage extends PageObject {
         return listOfElements;
     }
 
-    public WebElement moveToWomenPage() {
+    public WebElement womenPage() {
         return womenPage;
     }
 
-    public void clickToButton() {
+    public void clickWomensPageButton() {
         womenPage.click();
     }
 }

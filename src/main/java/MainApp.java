@@ -81,7 +81,7 @@ public class MainApp {
         assertThat(header.checkPriceCard().isDisplayed()).isTrue();
         header.openShoppingCard();
 
-        assertThat(shoppingCart.sum()).isEqualTo(shoppingCart.getTotalPriceString());
+        assertThat(shoppingCart.sum()).isEqualTo(shoppingCart.totalPriceString());
     }
 
     @Test
@@ -94,11 +94,11 @@ public class MainApp {
         driver.get("http://automationpractice.com/index.php");
         driver.manage().window().maximize();
         Actions builder = new Actions(driver);
-        builder.moveToElement(indexPage.moveToWomenPage()).build().perform();
-        indexPage.clickToButton();
+        builder.moveToElement(indexPage.womenPage()).build().perform();
+        indexPage.clickWomensPageButton();
 
         String numberOfElements = womenProducts.pageSizeOfElements().toString();
-        Boolean isNumberOfElemenmtsCorrect = womenProducts.getProductsNumber().contains(numberOfElements);
+        Boolean isNumberOfElemenmtsCorrect = womenProducts.productsNumber().contains(numberOfElements);
 
         assertThat(isNumberOfElemenmtsCorrect).isTrue();
     }
@@ -124,6 +124,6 @@ public class MainApp {
         builder.moveToElement(shoppingCart.deleteElement());
         shoppingCart.deleteElement().click();
 
-        assertThat(shoppingCart.getAlert());
+        assertThat(shoppingCart.alert());
         }
 }

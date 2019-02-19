@@ -47,7 +47,7 @@ public class ShoppingCart extends PageObject {
         return Double.parseDouble(totalPrice.getText().substring(1));
     }
 
-    public String getTotalPriceString() {
+    public String totalPriceString() {
         return String.format("%8.2f", totalPrice());
     }
 
@@ -59,7 +59,7 @@ public class ShoppingCart extends PageObject {
         return deleteElement;
     }
 
-    public WebElement getAlert() {
+    public WebElement alert() {
         return alert;
     }
 }
