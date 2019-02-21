@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page_objects.*;
 
@@ -47,9 +48,14 @@ public class MainApp {
         driver.quit();
     }
 
+    @BeforeMethod
+    public void doBeforeMethod(){
+        driver.get("http://automationpractice.com/index.php");
+        driver.manage().window().maximize();
+    }
+
     @Test
     public void loginErrorTest() {
-        driver.get("http://automationpractice.com/index.php");
         header.clickLoginLink();
         signInPage.clickSignInLink();
         assertThat(signInPage.isAlertOn());
@@ -57,8 +63,6 @@ public class MainApp {
 
     @Test
     public void totalPriceTest() {
-        driver.get("http://automationpractice.com/index.php");
-        driver.manage().window().maximize();
         Actions builder = new Actions(driver);
         builder.moveToElement(indexPage.findElement().get(2)).build().perform();
 
@@ -88,6 +92,5 @@ public class MainApp {
 
     @Test
     public void checkPageTitleTest() {
-        driver.get("http://automationpractice.com/index.php");
     }
 }
