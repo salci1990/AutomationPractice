@@ -11,20 +11,20 @@ public class ContactUs extends PageObject{
     }
 
     @FindBy(id = "email")
-    private WebElement setEmail1;
+    private WebElement setEmail2;
 
     @FindBy(id = "message")
-    private WebElement sendMessage1;
+    private WebElement sendMessage2;
 
     @FindBy(id = "errorMEssage")
     private WebElement erorrMessage;
 
     public WebElement setEmail() {
-        return setEmail1;
+        return setEmail2;
     }
 
     public WebElement sendMessage() {
-        return sendMessage1;
+        return sendMessage2;
     }
 
     public WebElement checkErrorMessage() {
