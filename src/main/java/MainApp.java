@@ -5,8 +5,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import page_objects.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +24,6 @@ public class MainApp {
     private IndexPage indexPage;
     private LayerCart layerCart;
     private ShoppingCart shoppingCart;
-    private WomenProducts womenProducts;
 
     @BeforeClass
     public void setUp() {
@@ -28,7 +32,7 @@ public class MainApp {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 20);
+        wait = new WebDriverWait(driver, 60);
 
         signInPage = new SignInPage(driver);
         header = new Header(driver);
@@ -37,7 +41,6 @@ public class MainApp {
         header = new Header(driver);
         layerCart = new LayerCart(driver);
         shoppingCart = new ShoppingCart(driver);
-        womenProducts = new WomenProducts(driver);
     }
 
     @AfterClass
@@ -45,9 +48,14 @@ public class MainApp {
         driver.quit();
     }
 
+    @BeforeMethod
+    public void doBeforeMethod(){
+        driver.get("http://automationpractice.com/index.php");
+        driver.manage().window().maximize();
+    }
+
     @Test
     public void loginErrorTest() {
-        driver.get("http://automationpractice.com/index.php");
         header.clickLoginLink();
         signInPage.clickSignInLink();
         assertThat(signInPage.isAlertOn());
@@ -55,8 +63,6 @@ public class MainApp {
 
     @Test
     public void totalPriceTest() {
-        driver.get("http://automationpractice.com/index.php");
-        driver.manage().window().maximize();
         Actions builder = new Actions(driver);
         builder.moveToElement(indexPage.findElement().get(2)).build().perform();
 
@@ -86,44 +92,5 @@ public class MainApp {
 
     @Test
     public void checkPageTitleTest() {
-        driver.get("http://automationpractice.com/index.php");
     }
-
-    @Test
-    public void checkWomensCounterElements() {
-        driver.get("http://automationpractice.com/index.php");
-        driver.manage().window().maximize();
-        Actions builder = new Actions(driver);
-        builder.moveToElement(indexPage.womenPage()).build().perform();
-        indexPage.clickWomensPageButton();
-
-        String numberOfElements = womenProducts.pageSizeOfElements().toString();
-        Boolean isNumberOfElemenmtsCorrect = womenProducts.productsNumber().contains(numberOfElements);
-
-        assertThat(isNumberOfElemenmtsCorrect).isTrue();
-    }
-
-    @Test
-    public void elementDeleteTest() {
-        driver.get("http://automationpractice.com/index.php");
-        driver.manage().window().maximize();
-        Actions builder = new Actions(driver);
-        builder.moveToElement(indexPage.findElement().get(0)).build().perform();
-
-        indexPage.clickAddButton();
-
-        wait.until(ExpectedConditions.visibilityOf(layerCart.exitWindow()));
-        assertThat(layerCart.exitWindow().isDisplayed()).isTrue();
-        layerCart.closeLayerCart();
-
-        builder.moveToElement(header.shopingCard()).build().perform();
-        wait.until(ExpectedConditions.visibilityOf(header.checkPriceCard()));
-        assertThat(header.checkPriceCard().isDisplayed()).isTrue();
-        header.openShoppingCard();
-
-        builder.moveToElement(shoppingCart.deleteElement());
-        shoppingCart.deleteElement().click();
-
-        assertThat(shoppingCart.isAlertDisplayed()).isTrue();
-        }
 }
