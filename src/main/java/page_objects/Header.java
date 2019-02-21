@@ -19,6 +19,9 @@ public class Header extends PageObject {
     @FindBy(id = "button_order_cart")
     private WebElement pricesCard;
 
+    @FindBy(tagName = "Contact us")
+    private WebElement contactUs;
+
     public void clickLoginLink() {
         loginLink.click();
     }
@@ -33,5 +36,9 @@ public class Header extends PageObject {
 
     public WebElement checkPriceCard() {
         return pricesCard;
+    }
+
+    public void contactUs() {
+        contactUs.click();
     }
 }
