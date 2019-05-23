@@ -1,3 +1,8 @@
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -5,26 +10,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
 import page_objects.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MainApp {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private SignInPage signInPage;
-    private Header header;
-    private IndexPage indexPage;
-    private LayerCart layerCart;
-    private ShoppingCart shoppingCart;
+    public static WebDriver driver;
+    public static WebDriverWait wait;
+    public static SignInPage signInPage;
+    public static Header header;
+    public static IndexPage indexPage;
+    public static LayerCart layerCart;
+    public static ShoppingCart shoppingCart;
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
 
         System.setProperty("webdriver.chrome.driver", "lib/chromedriver");
         ChromeOptions options = new ChromeOptions();
@@ -41,12 +43,12 @@ public class MainApp {
         shoppingCart = new ShoppingCart(driver);
     }
 
-    @AfterClass
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.quit();
     }
 
-    @BeforeMethod
+    @BeforeEach
     public void doBeforeMethod(){
         driver.get("http://automationpractice.com/index.php");
         driver.manage().window().maximize();
